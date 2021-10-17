@@ -1,0 +1,142 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+@startuml Controller-Klasse
+
+interface Promise<T>
+
+package @nestjs/common {
+  class "function Controller(): ClassDecorator" as Controller
+  hide Controller circle
+
+  class "function UseGuards(): ClassDecorator | MethodDecorator" as UseGuards
+  hide UseGuards circle
+
+  class "function UseInterceptors(): ClassDecorator | MethodDecorator" as UseInterceptors
+  hide UseInterceptors circle
+
+  class "function Get(): MethodDecorator" as Get
+  hide Get circle
+
+  class "function Post(): MethodDecorator" as Post
+  hide Post circle
+
+  class "function Put(): MethodDecorator" as Put
+  hide Put circle
+
+  class "function Delete(): MethodDecorator" as Delete
+  hide Delete circle
+
+  class "function Req(): ParameterDecorator" as Req
+  hide Req circle
+
+  class "function Res(): ParameterDecorator" as Res
+  hide Res circle
+
+  class "function Param(): ParameterDecorator" as Param
+  hide Param circle
+
+  class "function Query(): ParameterDecorator" as Query
+  hide Query circle
+
+  class "function Body(): ParameterDecorator" as Body
+  hide Body circle
+
+  class "function Headers(): ParameterDecorator" as Headers
+  hide Headers circle
+
+  Controller -[hidden]down-> UseGuards
+  UseGuards -[hidden]down-> UseInterceptors
+  UseInterceptors -[hidden]down-> Get
+  Get -[hidden]down-> Post
+  Post -[hidden]down-> Put
+  Put -[hidden]down-> Delete
+  Delete -[hidden]down-> Req
+  Req -[hidden]down-> Res
+  Res -[hidden]down-> Param
+  Param -[hidden]down-> Query
+  Query -[hidden]down-> Body
+  Body -[hidden]down-> Headers
+}
+
+package express {
+  class Request
+  class Response
+}
+
+package security.auth {
+  enum Role {
+    ADMIN
+    MITARBEITER
+    ABTEILUNGSLEITER
+    KUNDE
+  }
+
+  class "const Roles = (...roles: Role[]) => SetMetadata()" as Roles
+  hide Roles circle
+
+  Roles ..> Role
+}
+
+package buch #DDDDDD {
+  package entity #FFFFFF {
+    class Buch <<entity>>
+  }
+
+  package service #FFFFFF {
+    class BuchService << control >>
+  }
+
+  BuchQuery --|> Buch
+
+  BuchController o-down-> "1" BuchService : service
+  BuchController ..> Buch
+
+  BuchController .up.> Controller
+  BuchController .up.> UseGuards
+  BuchController .up.> UseInterceptors
+  BuchController .up.> Get
+  BuchController .up.> Post
+  BuchController .up.> Put
+  BuchController .up.> Delete
+  BuchController .up.> Req
+  BuchController .up.> Res
+  BuchController .up.> Param
+  BuchController .up.> Query
+  BuchController .up.> Body
+  BuchController .up.> Headers
+
+  BuchController .up.> Roles
+  BuchController .up.> Role
+
+  BuchController ..> BuchQuery
+
+  BuchController ..> Request
+  BuchController ..> Response
+  BuchController ..> Promise
+
+  class BuchController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
+    + @Get async findById(@Param() id: string, @Req() req: Request, @Headers() version: string, @Res() res: Response): Promise<void>
+    + @Get async find(@Query() query: BuchQuery, @Req() req: Request,  @Res() res: Response): Promise<void>
+    + @Post @Roles() async create(@Body() buch: Buch, @Req() req: Request,  @Res() res: Response): Promise<void>
+    + @Put @Roles() async update(@Body() buch: Buch, @Param() id: string, @Headers() version: string, @Res() res: Response): Promise<void>
+    + @Delete @Roles() async delete(@Param() id: string, @Res() res: Response): Promise<void>
+  }
+}
+
+hide empty members
+
+footer (c) Juergen Zimmermann
+
+@enduml

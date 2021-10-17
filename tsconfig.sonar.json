@@ -1,0 +1,34 @@
+{
+  // OHNE exactOptionalPropertyTypes und useUnknownInCatchVariables
+  "compilerOptions": {
+    // "module": "ES2020", // ECMAScript Module einschl. import(...)
+    // "moduleResolution": "Node",
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2020",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true, // Kompatibilitaet zwischen CommonJS und ES Modulen, impliziert allowSyntheticDefaultImports=true
+    // "exactOptionalPropertyTypes": true, // bei optionalen Properties ggf. explizit undefined spezifizieren
+    "forceConsistentCasingInFileNames": true, // Gross-/Kleinschreibung bei Dateinamen
+    "noErrorTruncation": true,
+    "noFallthroughCasesInSwitch": true, // "break" muss bei switch vorhanden sein
+    "noImplicitAny": true, // Fehler bei implizitem Typ "any"
+    "noImplicitOverride": true, // Schluesselwort "override"
+    "noImplicitReturns": true, // bei jedem Code-Pfad muss es "return" geben
+    "noImplicitThis": true, // Fehler bei this mit implizitem "any"
+    "noUncheckedIndexedAccess": true, // undefined bei Resultaten fuer Indey-signaturen
+    "noUnusedLocals": true, // keine nicht-benutzen lokalen Variable
+    "noUnusedParameters": true, // keine nicht-benutzen Parameter
+    "preserveWatchOutput": true,
+    "strict": true, // alle "strict"-Optionen aktivieren
+    // "useUnknownInCatchVariables": true // unknown als default-Typ bei catch-Klauseln
+  }
+}

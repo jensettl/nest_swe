@@ -1,0 +1,83 @@
+# Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
+#
+# This program is free software: you can redistribute it and/or modify
+# #it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# kubectl logs keycloak-0 --namespace acme
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: keycloak
+  labels:
+    app: keycloak
+spec:
+  selector:
+    matchLabels:
+      app: keycloak
+  replicas: 1
+  serviceName: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      serviceAccountName: acme-keycloak
+      containers:
+        - image: jboss/keycloak:15.0.2
+          name: keycloak
+          envFrom:
+            - configMapRef:
+                name: keycloak-env
+          ports:
+            - containerPort: 8080
+              name: keycloak
+          securityContext:
+            # eingebauten User aus dem Basis-Image nutzen
+            runAsNonRoot: true
+            # jboss hat die Shell /sbin/nologin
+            runAsUser: 1000
+          # https://www.keycloak.org/docs/latest/server_installation
+          resources:
+            requests:
+              cpu: 600m
+              memory: 768Mi
+            limits:
+              cpu: 600m
+              memory: 768Mi
+          # https://medium.com/@xcoulon/storing-data-into-persistent-volumes-on-kubernetes-fb155da16666
+          # https://www.keycloak.org/docs/latest/server_installation
+          # /opt/jboss/keycloak/standalone/configuration/standalone.xml enthaelt java:jboss/datasources/KeycloakDS mit ${jboss.server.data.dir}/keycloak
+          # d.h. /opt/jboss/keycloak/standalone/data mit keycloak.mv.db
+          volumeMounts:
+            - mountPath: /opt/jboss/keycloak/standalone/data
+              name: keycloak-data-volume
+      volumes:
+        - name: keycloak-data-volume
+          persistentVolumeClaim:
+            claimName: keycloak-data-volume-keycloak-0
+  # "storage-constraint" fuer "Dynamic Volume Provisioning" https://kubernetes.io/docs/concepts/storage/dynamic-provisioning
+  volumeClaimTemplates:
+    - metadata:
+        name: keycloak-data-volume
+        labels:
+          app: keycloak-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
+        # gleicher Name wie beim lokalen PersistentVolume
+        # TODO bei "hostpath" wird der Pfad fuer Windows aus dem PersistentVolume nicht verwendet
+        storageClassName: manual

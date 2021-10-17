@@ -1,0 +1,70 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+@startuml Entity
+
+package @nestjs/mongoose {
+  class "function Schema() : PropertyDecorator" as Schema
+  class "function Prop() : PropertyDecorator" as Prop
+}
+
+package mongoose {
+  class Document
+}
+
+package buch.entity {
+  class "type BuchDocument = Buch & Document<>" as BuchDocument
+  hide BuchDocument circle
+
+  BuchDocument ..> Buch
+  BuchDocument .right.> Document
+
+  class Buch
+
+  Buch .right.> Schema
+  Buch .right.> Prop
+
+  Buch ..> BuchArt
+  Buch ..> Verlag
+
+  enum BuchArt {
+    KINDLE
+    DRUCKAUSGABE
+  }
+
+  enum Verlag {
+    FOO_VERLAG
+    BAR_VERLAG
+  }
+
+  class Buch <<entity>> <<@Schema>> {
+    + @Prop titel: string
+    + @Prop rating?: number
+    + @Prop art?: BuchArt
+    + @Prop verlag: Verlag
+    + @Prop preis: number
+    + @Prop rabatt?: number
+    + @Prop lieferbar?: boolean
+    + @Prop datum?: Date
+    + @Prop isbn: string
+    + @Prop homepage?: string
+    + @Prop schlagwoerter?: string[]
+  }
+}
+
+hide empty members
+
+footer (c) Jürgen Zimmermann
+
+@enduml
