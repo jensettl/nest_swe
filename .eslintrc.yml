@@ -28,15 +28,16 @@ parserOptions:
 plugins:
   - '@typescript-eslint'
   - unicorn
-  - prettier
-  - promise
+  # - prettier
+  # - promise
+  - import
   - security
   - security-node
-  - prefer-arrow
-  - clean-regex
-  - deprecation
+  # - prefer-arrow
+  # - regexp
+  # - deprecation
   - jest
-  - jest-formatting
+  # - jest-formatting
 
 extends:
   # https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin
@@ -46,23 +47,22 @@ extends:
   # https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/index.js#L40
   - plugin:unicorn/recommended
   # prettier ueberschreibt vorherige Konfigurationseinstellungen
-  - plugin:prettier/recommended
-  - prettier
+  # - plugin:prettier/recommended
+  # - prettier
   - plugin:node/recommended-module
-  - plugin:promise/recommended
+  # - plugin:promise/recommended
   - plugin:security/recommended
   - plugin:security-node/recommended
-  # https://github.com/RunDevelopment/eslint-plugin-clean-regex/blob/master/lib/configs.ts
-  - plugin:clean-regex/recommended
   # https://github.com/benmosher/eslint-plugin-import
-  - plugin:import/errors
-  - plugin:import/warnings
-  # https://github.com/jest-community/eslint-plugin-jest
-  - plugin:eslint-comments/recommended
+  - plugin:import/recommended
   - plugin:import/typescript
+  # https://github.com/jest-community/eslint-plugin-jest
+  # - plugin:eslint-comments/recommended
+  # https://github.com/ota-meshi/eslint-plugin-regexp/blob/master/lib/configs/recommended.ts
+  # - plugin:regexp/recommended
   - plugin:jest/recommended
   - plugin:jest/style
-  - plugin:jest-formatting/strict
+  # - plugin:jest-formatting/strict
 
 root: true
 
@@ -246,9 +246,9 @@ rules:
     - ignoreStatic: true
   '@typescript-eslint/unified-signatures': error
 
-  deprecation/deprecation: error
+  # deprecation/deprecation: error
 
-  eslint-comments/no-unused-disable: error
+  # eslint-comments/no-unused-disable: error
 
   # https://github.com/benmosher/eslint-plugin-import/issues/1667
   import/no-cycle:
@@ -271,7 +271,6 @@ rules:
   jest/no-restricted-matchers: error
   jest/no-standalone-expect: off
   jest/no-test-return-statement: error
-  jest/no-try-expect: off
   jest/prefer-expect-resolves: error
   jest/prefer-hooks-on-top: error
   jest/prefer-to-be: error
@@ -279,7 +278,7 @@ rules:
   jest/require-top-level-describe: error
   jest/valid-expect: off
 
-  # https://github.com/mysticatea/eslint-plugin-node/blob/master/lib/configs/_commons.js
+  # # https://github.com/mysticatea/eslint-plugin-node/blob/master/lib/configs/_commons.js
   node/callback-return: error
   node/exports-style: error
   node/file-extension-in-import: off
@@ -304,9 +303,11 @@ rules:
   node/prefer-promises/dns: error
   node/prefer-promises/fs: error
 
-  prefer-arrow/prefer-arrow-functions:
-    - error
-    - classPropertiesAllowed: false
+  # prefer-arrow/prefer-arrow-functions:
+  #   - error
+  #   - classPropertiesAllowed: false
+
+  # regexp/prefer-regexp-exec: error
 
   # https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/configs/recommended.js
   unicorn/catch-error-name:

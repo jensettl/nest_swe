@@ -26,6 +26,6 @@ interface GraphQlConfig {
 }
 
 export const graphQlConfig: GraphQlConfig = {
-    debug: debug === 'TRUE' || debug === 'true',
-    sandbox: sandbox === 'TRUE' || sandbox === 'true',
+    debug: debug?.toLowerCase() === 'true',
+    sandbox: sandbox?.toLowerCase() === 'true',
 };

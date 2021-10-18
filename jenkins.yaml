@@ -24,7 +24,7 @@
 # https://docs.docker.com/compose/compose-file/compose-file-v3
 services:
   jenkins-certs:
-    image: docker:20.10.8-dind
+    image: docker:20.10.9-dind
     volumes:
       - type: bind
         source: C:/Zimmermann/volumes/jenkins/certs

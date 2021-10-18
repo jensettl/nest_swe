@@ -25,7 +25,7 @@ const jestConfig: Config.InitialOptions = {
     // globals: { 'ts-jest': { useESM: true } },
 
     bail: true,
-    testMatch: ['<rootDir>/**/*.spec.ts'],
+    testMatch: ['<rootDir>/**/*.test.ts'],
     collectCoverageFrom: ['**/*.ts'],
     // default: ["/node_modules/"]
     coveragePathIgnorePatterns: [

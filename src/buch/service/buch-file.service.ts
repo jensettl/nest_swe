@@ -80,7 +80,7 @@ export class BuchFileService {
         fileType: FileTypeResult | undefined,
     ) {
         this.#logger.debug(
-            'save: filename=%s, fileType=%s',
+            'save: filename=%s, fileType=%o',
             filename,
             fileType,
         );
@@ -90,7 +90,6 @@ export class BuchFileService {
         }
 
         // Gibt es ein Buch zur angegebenen ID?
-        // eslint-disable-next-line line-comment-position, spaced-comment
         const buch = await this.#service.findById(filename); //NOSONAR
         if (buch === undefined) {
             return false;
@@ -158,7 +157,6 @@ export class BuchFileService {
         this.#logger.debug('#checkFilename: filename=%s', filename);
 
         // Gibt es ein Buch mit dem gegebenen "filename" als ID?
-        // eslint-disable-next-line line-comment-position, spaced-comment
         const buch = await this.#service.findById(filename); //NOSONAR
         if (buch === undefined) {
             const result = new BuchNotExists(filename);

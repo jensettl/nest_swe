@@ -32,7 +32,7 @@ const host = mailConfigEnv.host ?? 'mailserver';
 const portStr = mailConfigEnv.port ?? '5025';
 const port = Number.parseInt(portStr, 10);
 const loggerStr = mailConfigEnv.log;
-const logger = loggerStr === 'true' || loggerStr === 'TRUE';
+const logger = loggerStr?.toLowerCase() === 'true';
 
 /**
  * Konfiguration für den Mail-Client mit _nodemailer_.

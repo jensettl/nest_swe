@@ -33,7 +33,7 @@ spec:
       serviceAccountName: acme-mailserver
       containers:
         # Images mit einem Mailserver: analogic/poste.io und axigen/axigen
-        - image: docker.io/gessnerfl/fake-smtp-server:1.7.1
+        - image: docker.io/gessnerfl/fake-smtp-server:1.8.0
           name: mailserver
           envFrom:
             - configMapRef:

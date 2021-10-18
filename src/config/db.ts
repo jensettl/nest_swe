@@ -33,12 +33,11 @@ const atlas = host.endsWith('mongodb.net');
 const user = dbConfigEnv.user ?? 'admin';
 const pass = dbConfigEnv.password ?? 'p';
 const autoIndex =
-    dbConfigEnv.autoIndex === 'true' || dbConfigEnv.autoIndex === 'TRUE';
+    dbConfigEnv.autoIndex?.toLowerCase() === 'true';
 const dbPopulate =
-    dbConfigEnv.populate === 'true' || dbConfigEnv.populate === 'TRUE';
+    dbConfigEnv.populate?.toLowerCase() === 'true';
 const dbPopulateFiles =
-    dbConfigEnv.populateFiles === 'true' ||
-    dbConfigEnv.populateFiles === 'TRUE';
+    dbConfigEnv.populateFiles?.toLowerCase() === 'true';
 
 // https://docs.mongodb.com/manual/reference/connection-string
 // Default:

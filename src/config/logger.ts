@@ -15,7 +15,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import type { LoggerOptions } from 'pino';
 import type { PrettyOptions } from 'pino-pretty';
 import { env } from './env';
 import pino from 'pino';
@@ -26,6 +25,10 @@ import { resolve } from 'path';
  * die Request-Protokollierung mit _Morgan_.
  * @packageDocumentation
  */
+
+const logDirDefault = 'log';
+const logFileNameDefault = 'server.log';
+const logFileDefault = resolve(logDirDefault, logFileNameDefault);
 
 const { logConfigEnv, nodeConfigEnv } = env;
 
@@ -40,20 +43,39 @@ if (logLevel === undefined) {
     logLevel = production ? 'info' : 'debug';
 }
 
-const { logDir } = logConfigEnv;
-// stderr = 2
-const destination = logDir === undefined ? 1 : resolve(logDir, 'server.log');
+const { logDir, pretty, def } = logConfigEnv;
+const logFile = logDir === undefined
+    ? logFileDefault
+    : resolve(logDir, logFileNameDefault);
+console.log(`loggerConfig: logLevel=${logLevel}, logFile=${logFile}, pretty=${pretty}, def=${def}`); // eslint-disable-line security-node/detect-crlf
 
+const fileOptions = {
+    level: logLevel,
+    target: 'pino/file',
+    options: { destination: logFile },
+};
 const prettyOptions: PrettyOptions = {
     translateTime: 'SYS:standard',
     singleLine: true,
     colorize: true,
     ignore: 'pid,hostname',
 };
-
-const options: LoggerOptions = {
+const prettyTransportOptions = {
     level: logLevel,
-    prettyPrint: prettyOptions,
+    target: 'pino-pretty',
+    options: prettyOptions,
 };
 
-export const parentLogger = pino(options, pino.destination(destination));
+const options: pino.TransportMultiOptions | pino.TransportSingleOptions = pretty
+    ? {
+        targets: [fileOptions, prettyTransportOptions],
+    }
+    : {
+        targets: [fileOptions],
+    };
+const transports = pino.transport(options); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+
+// https://github.com/pinojs/pino/issues/1160#issuecomment-944081187
+export const parentLogger = def
+    ? pino(pino.destination(logFileDefault))
+    : pino({ level: logLevel }, transports); // eslint-disable-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument

@@ -38,7 +38,7 @@ export class DbService implements OnApplicationShutdown {
     readonly #logger = getLogger(DbService.name);
 
     /**
-     * DB-Verbindung beim Herunterfahren schließen.
+     * DB-Verbindung beim Herunterfahren schließen. Siehe main.ts
      * @param signal z.B. `SIGINT`
      */
     async onApplicationShutdown(signal?: string) {
@@ -47,7 +47,7 @@ export class DbService implements OnApplicationShutdown {
         if (signal === ShutdownSignal.SIGINT) {
             await disconnect();
             this.#logger.info(
-                'onApplicationShutdown: Die DB-Verbindung für MongoDB wird geschlossen',
+                'onApplicationShutdown: Die DB-Verbindung fuer MongoDB wird geschlossen',
             );
         }
     }

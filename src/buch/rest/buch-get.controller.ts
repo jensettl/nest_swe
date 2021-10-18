@@ -51,19 +51,27 @@ import { Request, Response } from 'express';
 import { ResponseTimeInterceptor, getLogger } from '../../logger';
 import { Buch } from '../entity';
 import { BuchReadService } from '../service';
+// TODO https://github.com/typescript-eslint/typescript-eslint/issues/3950
+// TODO https://github.com/prettier/prettier/issues/11600
 import type { ObjectID } from 'bson';
 import { getBaseUri } from './getBaseUri';
 import { paths } from '../../config';
 
+// TypeScript
+interface Link {
+    href: string;
+}
 interface Links {
-    self: { href: string };
-    list?: { href: string };
-    add?: { href: string };
-    update?: { href: string };
-    remove?: { href: string };
+    self: Link;
+    // optional
+    list?: Link;
+    add?: Link;
+    update?: Link;
+    remove?: Link;
 }
 
 // Interface fuer GET-Request mit Links fuer HATEOAS
+// DTO = data transfer object
 export interface BuchDTO extends Buch {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     _links: Links;
@@ -127,16 +135,20 @@ export class BuchQuery extends Buch {
 /**
  * Die Controller-Klasse für die Verwaltung von Bücher.
  */
+// Decorator in TypeScript
 @Controller(paths.api)
 @UseGuards(JwtAuthGuard, RolesGuard)
 @UseInterceptors(ResponseTimeInterceptor)
 @ApiTags('REST-API')
 @ApiBearerAuth()
 export class BuchGetController {
+    // readonly in TypeScript, vgl. C#
+    // private ab ES 2019
     readonly #service: BuchReadService;
 
     readonly #logger = getLogger(BuchGetController.name);
 
+    // Dependency Injection (DI)
     constructor(service: BuchReadService) {
         this.#service = service;
     }

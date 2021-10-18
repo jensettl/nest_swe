@@ -93,7 +93,7 @@ describe('Login', () => {
 
         expect(token).toBeDefined();
         expect(token).not.toBeNull();
-        expect(token).toMatch(/[a-z0-9]+\.[a-z0-9]+\.[a-z0-9]+/iu);
+        expect(token).toMatch(/[a-z\d]+\.[a-z\d]+\.[a-z\d]+/iu);
     });
 
     test('Login mit falschem Passwort', async () => {

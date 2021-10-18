@@ -355,11 +355,15 @@ Desktop-Applikation _Postman_ nutzen: https://www.postman.com.
 
 ## Tests aufrufen
 
-Folgende Voraussetzungen müssen erfüllt sein:
+Folgende Voraussetzungen müssen oder sollten erfüllt sein:
 
 - Der MongoDB-Server (lokal oder bei Atlas) muss gestartet sein.
 - Port-Forwarding muss für MongoDB aktiviert sein, z.B. durch `skaffold dev`.
-- Der Appserver darf _nicht gestartet_ sein.
+- Der Appserver muss _nicht gestartet_ sein.
+- In `.env` sollte man die Umgebungsvariable `LOG_DEFAULT` auf `true` setzen,
+  damit nur mit Log-Level `INFO` protokolliert wird, weil _Pino_ mit Log-Level
+  `DEBUG` sonst evtl. nach dem Test-Ende noch protokolliert, was wiederum _Jest_
+  als Fehler interpretiert.
 
 Nun kann man die Tests folgendermaßen in einer Powershell aufrufen:
 
@@ -372,7 +376,7 @@ z.B.:
 
 ```PowerShell
     npm exec jest --detectOpenHandles --errorOnDeprecated `
-        --forceExit --runTestsByPath 'test\buch\buch-get.controller.spec.ts'
+      --forceExit --runTestsByPath '__tests__\buch\buch-get.controller.test.ts'
 ```
 
 ## Docker-Image durch Buildpacks

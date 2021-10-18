@@ -47,7 +47,7 @@ if (Number.isNaN(port)) {
     } else {
         // Heroku
         if (nodeConfigEnv.port === undefined) {
-            process.exit(0); // eslint-disable-line no-process-exit,node/no-process-exit
+            process.exit(0); // eslint-disable-line no-process-exit, node/no-process-exit
         }
         port = Number.parseInt(nodeConfigEnv.port, 10);
     }

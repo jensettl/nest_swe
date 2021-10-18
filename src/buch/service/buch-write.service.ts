@@ -150,9 +150,8 @@ export class BuchWriteService {
         //    Document.findOneAndUpdate(update)
         //    document.updateOne(bedingung)
         const options = BuchWriteService.UPDATE_OPTIONS;
-        // eslint-disable-next-line max-len, prettier/prettier
+        // eslint-disable-next-line max-len
         const updated = await this.#buchModel.findByIdAndUpdate(new ObjectID(id), buch, options); //NOSONAR
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (updated === null) {
             this.#logger.debug('update: Kein Buch mit id=%s', id);
             return new BuchNotExists(id);
@@ -271,7 +270,7 @@ export class BuchWriteService {
         // Pattern "Active Record" (urspruengl. von Ruby-on-Rails)
         const result = await this.#buchModel.findOne({ titel }, { _id: true }); //NOSONAR
         if (result !== null) {
-            const id = (result.id as ObjectID).toString();
+            const id = result._id.toString();
             this.#logger.debug('#checkTitelExists: id=%s', id);
             return new TitelExists(titel, id);
         }

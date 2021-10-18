@@ -87,10 +87,7 @@ export class BuchReadService {
         const buch = await this.#buchModel.findById(id); //NOSONAR
         this.#logger.debug('findById: buch=%o', buch);
 
-        if (buch === null) {
-            return undefined;
-        }
-        return buch;
+        return buch || undefined;
     }
 
     /**
@@ -157,7 +154,6 @@ export class BuchReadService {
         // Model<Document>.findOne(query), falls das Suchkriterium eindeutig ist
         // bei findOne(query) wird null zurueckgeliefert, falls nichts gefunden
         // lean() liefert ein "Plain JavaScript Object" statt ein Mongoose Document
-        // eslint-disable-next-line prettier/prettier
         const buecher = await this.#buchModel.find( //NOSONAR
             dbFilter as FilterQuery<BuchDocument>,
         ); //NOSONAR

@@ -20,11 +20,14 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { corsOptions, helmetHandlers } from './security';
 import { nodeConfig, paths } from './config';
 import { AppModule } from './app.module';
+// TODO https://github.com/typescript-eslint/typescript-eslint/issues/3950
+// TODO https://github.com/prettier/prettier/issues/11600
 import type { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import type { SwaggerCustomOptions } from '@nestjs/swagger';
 import compression from 'compression';
 
+// Destructuring
 const { httpsOptions, port } = nodeConfig;
 
 // "Arrow Function" ab ES 2015
@@ -42,7 +45,8 @@ const setupSwagger = (app: INestApplication) => {
     SwaggerModule.setup(paths.swagger, app, document, options);
 };
 
-// async/await ab ES 2017 (analog zu C#)
+// async/await ab ES 2017, vgl: C#
+// Promise ab ES 2015, vgl: Future in Java
 const bootstrap = async () => {
     const app =
         httpsOptions === undefined
@@ -66,3 +70,8 @@ const bootstrap = async () => {
 // "Top-Level await" ab ES 2021, nicht fuer CommonJS-Module
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 bootstrap();
+
+// IIFE = immediately invoked function expression
+// (async () => {
+//     await bootstrap();
+// })();

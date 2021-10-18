@@ -16,7 +16,7 @@
 # Aufruf:   i.a. bereits eingestellt:   $env:SKAFFOLD_PROFILE = 'dev'
 #           skaffold dev
 
-apiVersion: skaffold/v2beta23
+apiVersion: skaffold/v2beta24
 kind: Config
 metadata:
   name: backend

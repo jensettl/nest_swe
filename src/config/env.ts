@@ -20,10 +20,10 @@
  * @packageDocumentation
  */
 
-import type { Level } from 'pino';
 // Umgebungsvariable durch die Konfigurationsdatei .env
 // evtl. node-config
 import dotenv from 'dotenv';
+import type pino from 'pino';
 
 // .env nur einlesen, falls nicht in Kubernetes bzw. in der Cloud
 dotenv.config();
@@ -50,6 +50,8 @@ const {
     APOLLO_SANDBOX,
     LOG_LEVEL,
     LOG_DIR,
+    LOG_PRETTY,
+    LOG_DEFAULT,
     JWT_EXPIRES_IN,
     JWT_ISSUER,
     MAIL_HOST,
@@ -126,13 +128,17 @@ const authConfigEnv: AuthConfigEnv = {
 };
 
 interface LogConfigEnv {
-    readonly logLevel: Level | undefined;
+    readonly logLevel: pino.Level | undefined;
     readonly logDir: string | undefined;
+    readonly pretty: boolean;
+    readonly def: boolean;
 }
 
 const logConfigEnv: LogConfigEnv = {
-    logLevel: LOG_LEVEL as Level | undefined,
+    logLevel: LOG_LEVEL as pino.Level | undefined,
     logDir: LOG_DIR === undefined ? LOG_DIR : LOG_DIR.trimEnd(),
+    pretty: LOG_PRETTY?.toLowerCase() === 'true',
+    def: LOG_DEFAULT?.toLowerCase() === 'true',
 };
 
 interface MailConfigEnv {
