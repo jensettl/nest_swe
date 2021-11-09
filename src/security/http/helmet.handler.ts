@@ -22,16 +22,14 @@
  */
 
 // Alternative zu helmet: lusca von Kraken
-import helmet from 'helmet';
-
-const {
+import {
     contentSecurityPolicy,
     frameguard,
     hidePoweredBy,
     hsts,
     noSniff,
     xssFilter,
-} = helmet;
+} from 'helmet';
 
 /**
  * Security-Funktionen für z.B. CSP, XSS, Click-Jacking, HSTS und MIME-Sniffing.

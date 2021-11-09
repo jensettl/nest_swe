@@ -1,0 +1,87 @@
+# Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# siehe app.module.ts
+
+# Funktionen, um Autos zu empfangen
+type Query {
+  autos(modell: String): [Auto]
+
+  auto(id: ID!): Auto
+}
+
+# Funktionen, um Autos anzulegen, zu aktualisieren oder zu loeschen
+type Mutation {
+  create(
+    modell: String!
+    verbrauch: Int
+    typ: Typ
+    marke: Marke!
+    preis: Float
+    rabatt: Float
+    lieferbar: Boolean
+    datum: String
+    modellnr: String
+    homepage: String
+    herstellorte: [String]
+  ): String
+
+  update(id: ID, version: Int, auto: AutoUpdateInput!): Int
+
+  delete(id: ID!): Boolean
+}
+
+# Datenschema eines Autoes, das empfangen wird
+type Auto {
+  id: ID
+  version: Int
+  modell: String
+  verbrauch: Int
+  typ: Typ
+  marke: Marke
+  preis: Float
+  rabatt: Float
+  lieferbar: Boolean
+  datum: String
+  modellnr: String
+  homepage: String
+  herstellorte: [String]
+}
+
+# Enum-Typ fuer die Typ eines Autoes
+enum Typ {
+  SPORTWAGEN
+  FAMILIENKUTSCHE
+}
+
+# Enum-Typ fuer den Marke eines Autoes
+enum Marke {
+  AUDI
+  BMW
+}
+
+input AutoUpdateInput {
+  modell: String!
+  verbrauch: Int
+  typ: Typ
+  marke: Marke!
+  preis: Float
+  rabatt: Float
+  lieferbar: Boolean
+  datum: String
+  modellnr: String
+  homepage: String
+  herstellorte: [String]
+}

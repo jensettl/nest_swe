@@ -74,6 +74,7 @@ interface JwtConfig {
 }
 
 export const jwtConfig: JwtConfig = {
+    // shorthand properties
     algorithm,
     publicKey,
     privateKey,

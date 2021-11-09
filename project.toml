@@ -14,7 +14,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 # Aufruf:
-# pack build juergenzimmermann/buch:1.0.0-buildpacks --builder paketobuildpacks/builder:base
+# pack build juergenzimmermann/auto:1.0.0-buildpacks --builder paketobuildpacks/builder:base
 
 # ------------------------------------------------------------------------------
 # P r o j e c t   D e s c r i p t o r   f u e r   p a c k
@@ -29,8 +29,8 @@
 
 # table = Key/Value-Paare
 [project]
-id = "com.acme.buch"
-name = "Microservice buch"
+id = "com.acme.auto"
+name = "Microservice auto"
 version = "1.0.0"
 authors = ["Juergen.Zimmermann@h-ka.de"]
 
@@ -54,34 +54,34 @@ include = [
   #"/node_modules",
 ]
 
-#[[build.buildpacks]]
+[[build.buildpacks]]
 # https://console.cloud.google.com/gcr/images/paketo-buildpacks/GLOBAL/procfile
-#uri = "gcr.io/paketo-buildpacks/procfile:4.3.0"
+# https://github.com/paketo-buildpacks/procfile/tags
+uri = "gcr.io/paketo-buildpacks/procfile:4.4.1"
 
 #[[build.buildpacks]]
 # https://console.cloud.google.com/gcr/images/paketo-buildpacks/GLOBAL/npm-install
-#uri = "gcr.io/paketo-buildpacks/npm-install:0.4.0"
+# https://github.com/paketo-buildpacks/npm-install/tags
+#uri = "gcr.io/paketo-buildpacks/npm-install:0.5.0"
 
 #[[build.buildpacks]]
 # https://console.cloud.google.com/gcr/images/paketo-buildpacks/GLOBAL/npm-start
-#uri = "gcr.io/paketo-buildpacks/npm-start:0.4.0"
-
-#[[build.buildpacks]]
-# https://console.cloud.google.com/gcr/images/paketo-buildpacks/GLOBAL/node-start
-#uri = "gcr.io/paketo-buildpacks/node-start:0.3.0"
+# https://github.com/paketo-buildpacks/npm-start/tags
+#uri = "gcr.io/paketo-buildpacks/npm-start:0.5.0"
 
 [[build.buildpacks]]
 # https://console.cloud.google.com/gcr/images/paketo-buildpacks/GLOBAL/node-engine
-uri = "gcr.io/paketo-buildpacks/node-engine:0.9.0"
+# https://github.com/paketo-buildpacks/node-engine/tags
+uri = "gcr.io/paketo-buildpacks/node-engine:0.10.0"
 
 [[build.buildpacks]]
 # https://console.cloud.google.com/gcr/images/paketo-buildpacks/GLOBAL/nodejs
+# https://github.com/paketo-buildpacks/nodejs/tags
 uri = "gcr.io/paketo-buildpacks/nodejs:0.9.0"
 
 [[build.env]]
 name = "BP_NODE_VERSION"
-#value = "16.10.0"
-value = "16.9.1"
+value = "16.13.0"
 
 [[build.env]]
 name = "BP_LAUNCHPOINT"

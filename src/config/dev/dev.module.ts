@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { buchSchema, modelName } from '../../buch/entity';
+import { autoSchema, modelName } from '../../auto/entity';
 import { DbModule } from '../../db/db.module';
 import { DbPopulateService } from './db-populate.service';
 import { Module } from '@nestjs/common';
@@ -26,7 +26,7 @@ import { MongooseModule } from '@nestjs/mongoose';
         MongooseModule.forFeature([
             {
                 name: modelName,
-                schema: buchSchema,
+                schema: autoSchema,
             },
         ]),
     ],

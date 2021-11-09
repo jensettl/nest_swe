@@ -1,0 +1,22 @@
+ {
+  "rest-client.environmentVariables": {
+    "localHTTPS": {
+      "restUrl": "https://localhost:3000/api",
+      "authUrl": "https://localhost:3000/auth",
+      "graphQlUrl": "https://localhost:3000/graphql",
+      "fileUrl": "https://localhost:3000/file"
+    },
+    "kubernetesHTTP": {
+      "restUrl": "http://localhost:3000/api",
+      "authUrl": "http://localhost:3000/auth",
+      "graphQlUrl": "http://localhost:3000/graphql",
+      "fileUrl": "http://localhost:3000/file"
+    },
+    "heroku": {
+      "restUrl": "https://gener-iert-12345.herokuapp.com/api",
+      "authUrl": "https://gener-iert-12345.herokuapp.com/auth",
+      "graphQlUrl": "https://gener-iert-12345.herokuapp.com/graphql",
+      "fileUrl": "https://gener-iert-12345.herokuapp.com:3000/file"
+    }
+  }
+}

@@ -17,12 +17,12 @@
 
 /**
  * Das Modul enthält die Testdaten für
- * - DB neu laden mit Buchdaten
+ * - DB neu laden mit Autodaten
  * - DB neu laden mit Binärdateien
  * - Benutzerdaten
  * @packageDocumentation
  */
 
-export * from './testdaten';
-export * from './testfiles';
-export * from './users';
+export { testdaten } from './testdaten';
+export { testfiles } from './testfiles';
+export { users } from './users';

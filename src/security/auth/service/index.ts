@@ -21,7 +21,9 @@
  * @packageDocumentation
  */
 
-export * from './auth.service';
-export * from './errors';
-export * from './role';
-export * from './user.service';
+export { AuthService } from './auth.service';
+export type { LoginResult } from './auth.service';
+export { NoTokenError, UserInvalidError } from './errors';
+export { Role } from './role';
+export type { User } from './user.service';
+export { UserService } from './user.service';

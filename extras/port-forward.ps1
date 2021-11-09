@@ -19,7 +19,7 @@
 
 # "Param" muss in der 1. Zeile sein
 Param (
-    [string]$service = 'buch'
+    [string]$service = 'auto'
 )
 
 Set-StrictMode -Version Latest
@@ -30,7 +30,7 @@ if ($versionMinimum -gt $versionCurrent) {
     throw "PowerShell $versionMinimum statt $versionCurrent erforderlich"
 }
 
-# Titel setzen
+# Modell setzen
 $host.ui.RawUI.WindowTitle = "$service port forward"
 
 $namespace = 'acme'

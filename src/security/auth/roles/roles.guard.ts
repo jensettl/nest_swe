@@ -18,7 +18,7 @@ import type { CanActivate, ExecutionContext } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 import { ROLES_KEY } from './roles.decorator';
 import { Reflector } from '@nestjs/core';
-import type { RequestWithUser } from '../authentication/jwt-auth.guard';
+import type { RequestWithUser } from '../jwt/jwt-auth.guard';
 import type { Role } from '../service';
 import { UserService } from '../service';
 import { getLogger } from '../../../logger';
@@ -61,12 +61,12 @@ export class RolesGuard implements CanActivate {
         }
 
         const request: RequestWithUser = context.switchToHttp().getRequest();
-        const requestUser = request.user;
-        this.#logger.debug('canActivate: requestUser=%o', requestUser);
-        if (requestUser === undefined) {
+        const userPayload = request.user;
+        this.#logger.debug('canActivate: userPayload=%o', userPayload);
+        if (userPayload === undefined) {
             return false;
         }
-        const { userId } = requestUser;
+        const { userId } = userPayload;
         const user = await this.#userService.findById(userId);
         this.#logger.debug('canActivate: user=%o', user);
         if (user === undefined) {

@@ -67,7 +67,7 @@ export class HealthController {
         return this.#health.check([
             () =>
                 this.#http.pingCheck(
-                    'buch REST-API',
+                    'auto REST-API',
                     `${this.#schema}://${nodeConfig.host}:${
                         nodeConfig.port
                     }/api/000000000000000000000001`,

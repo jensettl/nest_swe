@@ -33,7 +33,7 @@ const { httpsOptions, port } = nodeConfig;
 // "Arrow Function" ab ES 2015
 const setupSwagger = (app: INestApplication) => {
     const config = new DocumentBuilder()
-        .setTitle('Buch')
+        .setTitle('Auto')
         .setDescription('Beispiel für Software Engineering')
         .setVersion('1.0.0')
         .addBearerAuth()
@@ -51,7 +51,7 @@ const bootstrap = async () => {
     const app =
         httpsOptions === undefined
             ? await NestFactory.create(AppModule)
-            : await NestFactory.create(AppModule, { httpsOptions });
+            : await NestFactory.create(AppModule, { httpsOptions }); // "Shorthand Properties" ab ES 2015
 
     // https://docs.nestjs.com/security/helmet
     app.use(helmetHandlers);

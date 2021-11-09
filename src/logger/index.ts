@@ -21,6 +21,6 @@
  * @packageDocumentation
  */
 
-export * from './logger';
-export * from './request-logger.middleware';
-export * from './response-time.interceptor';
+export { getLogger } from './logger';
+export { RequestLoggerMiddleware } from './request-logger.middleware';
+export { ResponseTimeInterceptor } from './response-time.interceptor';

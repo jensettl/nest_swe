@@ -32,12 +32,9 @@ const host = detected ? 'mongodb' : dbConfigEnv.host ?? 'localhost';
 const atlas = host.endsWith('mongodb.net');
 const user = dbConfigEnv.user ?? 'admin';
 const pass = dbConfigEnv.password ?? 'p';
-const autoIndex =
-    dbConfigEnv.autoIndex?.toLowerCase() === 'true';
-const dbPopulate =
-    dbConfigEnv.populate?.toLowerCase() === 'true';
-const dbPopulateFiles =
-    dbConfigEnv.populateFiles?.toLowerCase() === 'true';
+const autoIndex = dbConfigEnv.autoIndex?.toLowerCase() === 'true';
+const dbPopulate = dbConfigEnv.populate?.toLowerCase() === 'true';
+const dbPopulateFiles = dbConfigEnv.populateFiles?.toLowerCase() === 'true';
 
 // https://docs.mongodb.com/manual/reference/connection-string
 // Default:

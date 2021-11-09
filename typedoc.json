@@ -5,7 +5,7 @@
     "excludePrivate": true,
     "intentionallyNotExported": [
       "DbConfig",
-      "BuchIdVersion",
+      "AutoIdVersion",
       "Env",
       "GraphQlConfig",
       "JwtConfig",
@@ -16,7 +16,7 @@
       "Id",
       "Login",
       "LoginInput",
-      "src/buch/service/buch-file.service.ts:FindResult"
+      "src/auto/service/auto-file.service.ts:FindResult"
     ],
     "validation": {
       "invalidLink": true

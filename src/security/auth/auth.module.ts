@@ -15,9 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { AuthService, UserService } from './service';
-import { JwtStrategy, LocalStrategy } from './authentication';
 import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './jwt';
+import { LocalStrategy } from './local';
 import { LoginResolver } from './login.resolver';
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
