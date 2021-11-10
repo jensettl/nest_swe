@@ -33,6 +33,16 @@ import {
     ApiTags,
 } from '@nestjs/swagger';
 import {
+    AutoInvalid,
+    AutoNotExists,
+    AutoServiceError,
+    AutoWriteService,
+    ModellExists,
+    ModellNrExists,
+    VersionInvalid,
+    VersionOutdated,
+} from '../service';
+import {
     Body,
     Controller,
     Delete,
@@ -46,16 +56,6 @@ import {
     UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
-import {
-    AutoInvalid,
-    AutoNotExists,
-    AutoServiceError,
-    AutoWriteService,
-    ModellNrExists,
-    ModellExists,
-    VersionInvalid,
-    VersionOutdated,
-} from '../service';
 import type { CreateError, UpdateError } from '../service';
 import { JwtAuthGuard, Role, Roles, RolesGuard } from '../../security';
 import { Request, Response } from 'express';

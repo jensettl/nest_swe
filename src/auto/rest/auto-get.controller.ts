@@ -33,7 +33,7 @@ import {
     ApiResponse,
     ApiTags,
 } from '@nestjs/swagger';
-import type { AutoTyp, AutoDocument, Marke } from '../entity';
+import type { AutoDocument, AutoTyp, Marke } from '../entity';
 import {
     Controller,
     Get,

@@ -67,7 +67,7 @@ export class ModellNrExists extends AutoServiceError {
 /**
  * Union-Type für Fehler beim Neuanlegen eines Autoes.
  */
-export type CreateError = AutoInvalid | ModellNrExists | ModellExists;
+export type CreateError = AutoInvalid | ModellExists | ModellNrExists;
 
 /**
  * Klasse für eine ungültige Versionsnummer beim Ändern.

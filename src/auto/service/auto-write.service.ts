@@ -27,8 +27,8 @@ import {
     AutoInvalid,
     AutoNotExists,
     AutoServiceError,
-    ModellNrExists,
     ModellExists,
+    ModellNrExists,
     VersionInvalid,
     VersionOutdated,
 } from './errors';
@@ -87,7 +87,7 @@ export class AutoWriteService {
      */
     async create(
         auto: Auto,
-    ): Promise<AutoInvalid | ModellNrExists | ObjectID | ModellExists> {
+    ): Promise<AutoInvalid | ModellExists | ModellNrExists | ObjectID> {
         this.#logger.debug('create: auto=%o', auto);
         const validateResult = await this.#validateCreate(auto);
         if (validateResult instanceof AutoServiceError) {

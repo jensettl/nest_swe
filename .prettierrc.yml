@@ -16,6 +16,8 @@
 # https://github.com/prettier/prettier/issues/4102
 # https://github.com/prettier/prettier/pull/7466
 singleQuote: true
+parser: flow
+endOfLine: auto
 tabWidth: 2
 trailingComma: all
 overrides:

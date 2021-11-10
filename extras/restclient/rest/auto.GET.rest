@@ -19,7 +19,7 @@
 
 
 ### Suche alle Autos
-GET {{{{restUrl}}}}
+GET {{restUrl}}
 
 ### Suche mit vorhandener Auto-ID
 GET {{restUrl}}/000000000000000000000001

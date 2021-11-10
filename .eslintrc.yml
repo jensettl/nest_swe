@@ -403,7 +403,8 @@ rules:
   keyword-spacing: error
   # wegen //NOSONAR
   #line-comment-position: error
-  linebreak-style: error
+  # linebreak-style: error
+  linebreak-style: ["error", "windows"]
   max-classes-per-file: error
   max-depth: error
   # https://github.com/prettier/eslint-config-prettier#max-len
@@ -551,6 +552,7 @@ rules:
     - disallowRedundantWrapping: true
   prefer-rest-params: error
   prefer-template: error
+  prettier/prettier: ['error', {'endOfLine': 'auto', }]
   quote-props:
     - error
     - as-needed

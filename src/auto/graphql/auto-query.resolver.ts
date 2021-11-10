@@ -72,7 +72,8 @@ export class AutoQueryResolver {
     async find(@Args() modell: { modell: string } | undefined) {
         const modellStr = modell?.modell;
         this.#logger.debug('find: modell=%s', modellStr);
-        const suchkriterium = modellStr === undefined ? {} : { modell: modellStr };
+        const suchkriterium =
+            modellStr === undefined ? {} : { modell: modellStr };
         const autos = await this.#service.find(suchkriterium);
         if (autos.length === 0) {
             // UserInputError liefert Statuscode 200
