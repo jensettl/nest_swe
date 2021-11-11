@@ -23,7 +23,7 @@ package mongoose {
   class Document
 }
 
-package buch.entity {
+package auto.entity {
   class "type AutoDocument = Auto & Document<>" as AutoDocument
   hide AutoDocument circle
 
