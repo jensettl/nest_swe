@@ -21,5 +21,21 @@
  * @packageDocumentation
  */
 
-export * from './auth';
-export * from './http';
+export {
+    ROLES_KEY,
+    AuthService,
+    JwtAuthGuard,
+    JwtAuthGraphQlGuard,
+    JwtStrategy,
+    LocalAuthGuard,
+    LocalStrategy,
+    Roles,
+    RolesGuard,
+    RolesGraphQlGuard,
+    NoTokenError,
+    Role,
+    UserInvalidError,
+    UserService,
+} from './auth';
+export type { LoginResult, RequestWithUser, User } from './auth';
+export { corsOptions, helmetHandlers } from './http';

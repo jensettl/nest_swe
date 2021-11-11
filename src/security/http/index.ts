@@ -21,5 +21,5 @@
  * @packageDocumentation
  */
 
-export * from './cors.options';
-export * from './helmet.handler';
+export { corsOptions } from './cors.options';
+export { helmetHandlers } from './helmet.handler';

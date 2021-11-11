@@ -44,10 +44,11 @@ if (logLevel === undefined) {
 }
 
 const { logDir, pretty, def } = logConfigEnv;
-const logFile = logDir === undefined
-    ? logFileDefault
-    : resolve(logDir, logFileNameDefault);
-console.log(`loggerConfig: logLevel=${logLevel}, logFile=${logFile}, pretty=${pretty}, def=${def}`); // eslint-disable-line security-node/detect-crlf
+const logFile =
+    logDir === undefined ? logFileDefault : resolve(logDir, logFileNameDefault);
+console.log(
+    `loggerConfig: logLevel=${logLevel}, logFile=${logFile}, pretty=${pretty}, def=${def}`, // eslint-disable-line security-node/detect-crlf
+);
 
 const fileOptions = {
     level: logLevel,
@@ -68,11 +69,11 @@ const prettyTransportOptions = {
 
 const options: pino.TransportMultiOptions | pino.TransportSingleOptions = pretty
     ? {
-        targets: [fileOptions, prettyTransportOptions],
-    }
+          targets: [fileOptions, prettyTransportOptions],
+      }
     : {
-        targets: [fileOptions],
-    };
+          targets: [fileOptions],
+      };
 const transports = pino.transport(options); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
 
 // https://github.com/pinojs/pino/issues/1160#issuecomment-944081187

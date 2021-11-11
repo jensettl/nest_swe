@@ -42,26 +42,25 @@ export class InfoService implements OnApplicationBootstrap {
      */
     onApplicationBootstrap() {
         const banner = `
-            .       __                                    _____
-            .      / /_  _____  _________ ____  ____     /__  /
-            . __  / / / / / _ \\/ ___/ __ \`/ _ \\/ __ \\      / /
-            ./ /_/ / /_/ /  __/ /  / /_/ /  __/ / / /     / /___
-            .\\____/\\__,_/\\___/_/   \\__, /\\___/_/ /_/     /____(_)
-            .                     /____/
+            .         _                _           
+            .        /  \\     _   _  | |_    ___  
+            .       / _  \\   | | | | | __|  / _ \\ 
+            .      / ___  \\  | |_| | | |_  | (_) |
+            .     /_/   \\_\\  \\__,_| \\__| \\___/                 
         `;
         const { host, httpsOptions, nodeEnv, port, serviceHost, servicePort } =
             nodeConfig;
         const isK8s = k8sConfig.detected;
+        const kubernetesStr = isK8s
+            ? `Kubernetes: BUCH_SERVICE_HOST=${serviceHost}, BUCH_SERVICE_PORT=${servicePort}`
+            : 'N/A';
 
         this.#logger.info(stripIndent(banner));
         // https://nodejs.org/api/process.html
         // "Template String" ab ES 2015
         this.#logger.info('Node: %s', process.version);
         this.#logger.info('NODE_ENV: %s', nodeEnv);
-        this.#logger.info('Kubernetes: %s', isK8s ? 'ja' : 'N/A');
-        // Nullish Coalescing
-        this.#logger.info('BUCH_SERVICE_HOST: %s', serviceHost ?? 'N/A');
-        this.#logger.info('BUCH_SERVICE_PORT: %s', servicePort ?? 'N/A');
+        this.#logger.info(kubernetesStr);
 
         const desPods = isK8s ? ' des Pods' : '';
         this.#logger.info('Rechnername%s: %s', desPods, host);

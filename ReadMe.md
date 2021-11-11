@@ -203,37 +203,37 @@ Um effizient mit Apollo Sandbox zu arbeiten, empfiehlt es sich, dass man sich
 dort registriert, damit man z.B. Autovervollständigen nutzen kann. Für das
 Programmierbeispiel kann man beim Registrieren z.B. folgende Daten eingegeben:
 
-- _Graph title_: `Buch`
+- _Graph title_: `Auto`
 - _Graph type_: `Development` angeklickt
 - _Endpoint_: https://localhost:3000/graphql
 
 Abschließend klickt man dann den Button _Create Graph_ an.
 
 Beispielhafte _Queries_ und _Mutations_ für GraphQL gibt es in den Dateien
-`extras\restclient\graphql\buch.query.http` und
-`extras\restclient\graphql\buch.mutation.http`.
+`extras\restclient\graphql\auto.query.http` und
+`extras\restclient\graphql\auto.mutation.http`.
 
 In der Sandbox kann man z.B. folgende Query absetzen:
 
 ...
 {
-  buch(id: "000000000000000000000001") {
-    titel
-    art
-    isbn
+  auto(id: "000000000000000000000001") {
+    modell
+    typ
+    modellnr
     version
   }
 }
 ...
 
-Oder unter Verwendung von einer Variablen (hier: `buchId`):
+Oder unter Verwendung von einer Variablen (hier: `autoId`):
 
 ...
-query ($buchId: ID!) {
-  buch(id: $buchId) {
-    titel
-    art
-    isbn
+query ($autoId: ID!) {
+  auto(id: $autoId) {
+    modell
+    typ
+    modellnr
     version
   }
 }
@@ -243,7 +243,7 @@ Dazu muss man im unteren Abschnitt _Variables_ folgendes eintragen:
 
 ...
 {
-  "buchId": "000000000000000000000001"
+  "autoId": "000000000000000000000001"
 }
 ...
 
@@ -376,7 +376,7 @@ z.B.:
 
 ```PowerShell
     npm exec jest --detectOpenHandles --errorOnDeprecated `
-      --forceExit --runTestsByPath '__tests__\buch\buch-get.controller.test.ts'
+      --forceExit --runTestsByPath '__tests__\auto\auto-get.controller.test.ts'
 ```
 
 ## Docker-Image durch Buildpacks
@@ -385,7 +385,7 @@ Mittels _(Cloud Native) Buildpacks_ und der Konfigurationsdatei `project.toml`
 kann man ein Docker Image erstellen, ohne dass ein Dockerfile erforderlich ist.
 Das resultierende Image basiert auf _Ubuntu_ und erfordert, dass die
 TypeScript-Dateien in JavaScript übersetzt sind. Durch das npm-Skript `pack`
-wird das Docker-Image `docker.io/juergenzimmermann/buch:1.0.0` mit dem implizit
+wird das Docker-Image `docker.io/juergenzimmermann/auto:1.0.0` mit dem implizit
 übersetzten JavaScript-Code gebaut:
 
 ```PowerShell
@@ -397,7 +397,7 @@ Wie das Docker-Image gebaut wurde, kann man anschließend mit folgendem Kommando
 inspizieren:
 
 ```PowerShell
-    pack inspect juergenzimmermann/buch:1.0.0
+    pack inspect juergenzimmermann/auto:1.0.0
 ```
 
 ---
@@ -416,7 +416,7 @@ des Appservers. Wenn das Docker-Image erstellt ist (s.o.), kann das Deployment
 in Kubernetes folgendermaßen durchgeführt werden, was man z.B. mit _Lens_ oder
  _Octant_ inspizieren kann. Dabei wird die Logdatei im internen Verzeichnis
 `/var/log/node` angelegt, welches durch _Mounting_ dem Windows-Verzeichnis
-`C:\Zimmermann\volumes\buch` entspricht und mit _Schreibberechtigung_ existieren
+`C:\Zimmermann\volumes\auto` entspricht und mit _Schreibberechtigung_ existieren
 muss.
 
 ```PowerShell
@@ -679,12 +679,12 @@ Rechts oben kann man sich über den Menüpunkt _Sign Out_ ausloggen.
 
 Um nicht die DB `test` (s.o. in der URL) im künftigen Appserver zu benutzen,
 erstellt man in einer Powershell mit der Mongo CLI eine eigene DB (z.B. `acme`)
-mit einer leeren Collection (z.B. `Buch`):
+mit einer leeren Collection (z.B. `Auto`):
 
 ```text
     mongo "mongodb+srv://<<MEINE_KENNUNG>>:<<MEIN_PASSWORT_>>@cluster0-....mongodb.net/test?w=majority"
         use acme
-        db.createCollection('Buch')
+        db.createCollection('Auto')
         exit
 ```
 
@@ -817,6 +817,7 @@ Werten für Benutzername und Passwort aus der Atlas-Konfiguration:
 - APOLLO_SANDBOX=false
 - LOG_DIR=/tmp
 - LOG_LEVEL_CONSOLE=debug
+- LOG_PRETTY=true
 - USER_PASSWORD_ENCODED=$2b$10$YTg4.iW.FPRqHExVLRf05Ob/z/BQqjUxJgncct2TgxGBjl4cCUNGS
 
 ### Deployment für Heroku
@@ -912,7 +913,7 @@ verwenden.
 In Anlehnung an die
 [Guidelines von TypeScript](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines)
 
-- "Feature Filenames", z.B. buch.service.ts
+- "Feature Filenames", z.B. auto.service.ts
 - Klassennamen und Enums mit PascalCase
 - Attribute und Funktionen mit camelCase
 - private Properties _nicht_ mit vorangestelltem **\_**

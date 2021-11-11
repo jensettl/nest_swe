@@ -34,7 +34,7 @@ Thumbs.db
 coverage
 /.nyc_output
 /.clinic
-/__tests__/buch/__snapshots__
+/__tests__/auto/__snapshots__
 
 # Snyk
 .snyk
@@ -45,7 +45,7 @@ snyk-*.log
 # IDEs and editors
 /.idea
 *.iml
-.env
+# .env
 .project
 .classpath
 .c9/

@@ -25,7 +25,7 @@ if ($versionMinimum -gt $versionCurrent) {
     throw "PowerShell $versionMinimum statt $versionCurrent erforderlich"
 }
 
-# Titel setzen
+# Modell setzen
 $host.ui.RawUI.WindowTitle = "keycloak delete pvc"
 
 $namespace = 'acme'

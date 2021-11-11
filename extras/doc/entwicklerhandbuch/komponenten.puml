@@ -22,14 +22,14 @@ actor GraphQLClient
 node "Nest" {
   [RequestLoggerMiddleware]
 
-  [BuchController]
-  [BuchResolver]
-  [BuchFileController]
+  [AutoController]
+  [AutoResolver]
+  [AutoFileController]
 
-  [BuchService]
-  [BuchFileService]
+  [AutoService]
+  [AutoFileService]
 
-  [Buch]
+  [Auto]
 
   [MailService]
 }
@@ -48,7 +48,7 @@ cloud {
 }
 
 database "acme (MongoDB)" {
-    [Collection Buch]
+    [Collection Auto]
     [GridFS]
 }
 
@@ -59,21 +59,21 @@ node {
 RESTClient ~~> [RequestLoggerMiddleware]
 GraphQLClient ~~> [RequestLoggerMiddleware]
 
-[RequestLoggerMiddleware] ~~> [BuchController]
-[RequestLoggerMiddleware] ~~> [BuchResolver]
-[RequestLoggerMiddleware] ~~> [BuchFileController]
+[RequestLoggerMiddleware] ~~> [AutoController]
+[RequestLoggerMiddleware] ~~> [AutoResolver]
+[RequestLoggerMiddleware] ~~> [AutoFileController]
 
-[BuchController] --> [BuchService]
-[BuchResolver] --> [BuchService]
-[BuchFileController] --> [BuchFileService]
-[BuchService] ..> [Buch]
+[AutoController] --> [AutoService]
+[AutoResolver] --> [AutoService]
+[AutoFileController] --> [AutoFileService]
+[AutoService] ..> [Auto]
 
-[Buch] ~~> [Mongoose]
-[BuchFileService] ~~> [MongoDB\nNative Driver]
-[Mongoose] ~~> [Collection Buch]
+[Auto] ~~> [Mongoose]
+[AutoFileService] ~~> [MongoDB\nNative Driver]
+[Mongoose] ~~> [Collection Auto]
 [MongoDB\nNative Driver] ~~> [GridFS]
 
-[BuchService] --> [MailService]
+[AutoService] --> [MailService]
 [MailService] --> [nodemailer]
 [nodemailer] ~~> [Mailserver]
 

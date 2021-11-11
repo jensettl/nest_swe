@@ -48,10 +48,10 @@ const jwtPemDist = join(configDist, 'jwt');
 mkdirSync(jwtPemDist, { recursive: true });
 copySync(jwtPemSrc, jwtPemDist);
 
-const graphqlSrc = join(src, 'buch', 'graphql');
-const graphqlDist = join(dist, src, 'buch', 'graphql');
+const graphqlSrc = join(src, 'auto', 'graphql');
+const graphqlDist = join(dist, src, 'auto', 'graphql');
 mkdirSync(graphqlDist, { recursive: true });
-copyFileSync(join(graphqlSrc, 'buch.graphql'), join(graphqlDist, 'buch.graphql'));
+copyFileSync(join(graphqlSrc, 'auto.graphql'), join(graphqlDist, 'auto.graphql'));
 
 const graphqlAuthSrc = join(src, 'security', 'auth');
 const graphqlAuthDist = join(dist, src, 'security', 'auth');

@@ -1,0 +1,76 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+@startuml Anwendungskern
+
+interface Promise<T>
+
+package @nestjs/common {
+  class "function Injectable(): ClassDecorator" as Injectable
+  hide Injectable circle
+}
+
+package mongoose {
+  class FilterQuery
+  hide FilterQuery circle
+}
+
+package mail {
+  class MailService
+}
+
+package auto {
+  package entity {
+    class Auto
+    class AutoDocument
+
+  }
+
+  package service #DDDDDD {
+    class AutoInvalid
+    class ModellExists
+    class ModellNrExists
+    class VersionInvalid
+    class VersionOutdated
+
+    AutoService .up.> Promise
+    AutoService ..> Auto
+    AutoService ..> AutoDocument
+    AutoService .left.> AutoValidationService
+    AutoService ..> AutoInvalid
+    AutoService ..> ModellExists
+    AutoService ..> ModellNrExists
+    AutoService ..> VersionInvalid
+    AutoService ..> VersionOutdated
+    AutoService .right.> MailService
+    AutoService .up.> FilterQuery
+    AutoService .up.> Injectable
+
+    class AutoService << control >> <<@Injectable()>> {
+      + async findById(id: string): Promise<AutoDocument | undefined>
+      + async find(query?: FilterQuery<AutoDocument>): Promise<AutoDocument[]>
+      + async create(auto: Auto): Promise<string|AutoInvalid|ModellExists|ModellNrExists>
+      + async update(auto: Auto, id: string, version: string): Promise<number|AutoInvalid|ModellExists|ModellNrExists|VersionInvalid|VersionOutdated>
+      + async delete(id: string): Promise<boolean>
+    }
+
+    VersionOutdated -[hidden]-> AutoDocument
+  }
+}
+
+hide empty members
+
+footer (c) Jürgen Zimmermann
+
+@enduml

@@ -20,6 +20,6 @@
  * @packageDocumentation
  */
 
-export * from './roles.decorator';
-export * from './roles.guard';
-export * from './roles-graphql.guard';
+export { ROLES_KEY, Roles } from './roles.decorator';
+export { RolesGuard } from './roles.guard';
+export { RolesGraphQlGuard } from './roles-graphql.guard';

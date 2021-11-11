@@ -19,7 +19,7 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { Injectable } from '@nestjs/common';
 import { ROLES_KEY } from './roles.decorator';
 import { Reflector } from '@nestjs/core';
-import type { RequestWithUser } from '../authentication/jwt-auth.guard';
+import type { RequestWithUser } from '../jwt/jwt-auth.guard';
 import type { Role } from '../service';
 import { UserService } from '../service';
 import { getLogger } from '../../../logger';

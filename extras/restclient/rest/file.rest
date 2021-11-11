@@ -69,11 +69,11 @@ Content-Disposition: form-data; name="file"; filename="video.mp4"
 < ./binary/video.mp4
 --boundary--
 
-### Bild zu einem vorhandenen Buch runterladen (Webbrowser fuer Video benutzen)
+### Bild zu einem vorhandenen Auto runterladen (Webbrowser fuer Video benutzen)
 GET {{fileUrl}}/000000000000000000000001
 
-### Keine Datei zu einem vorhandenen Buch
+### Keine Datei zu einem vorhandenen Auto
 GET {{fileUrl}}/000000000000000000000002
 
-### Keine Datei zu einem nicht-vorhandenen Buch
+### Keine Datei zu einem nicht-vorhandenen Auto
 GET {{fileUrl}}/999999999999999999999999

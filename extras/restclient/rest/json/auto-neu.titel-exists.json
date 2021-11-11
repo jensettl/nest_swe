@@ -1,0 +1,13 @@
+{
+  "modell": "Alpha",
+  "verbrauch": 1,
+  "typ": "FAMILIENKUTSCHE",
+  "marke": "AUDI",
+  "preis": 99.9,
+  "rabatt": 0.1,
+  "lieferbar": true,
+  "datum": "2020-02-01",
+  "modellnr": "0-0070-0644-6",
+  "homepage": "https://test.de/",
+  "herstellorte": ["ESSLINGEN", "FRANKFURZ"]
+}

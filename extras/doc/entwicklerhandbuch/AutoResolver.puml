@@ -1,0 +1,101 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+@startuml Controller-Klasse
+
+interface Promise<T>
+
+package @nestjs/graphql {
+  class "function Resolver(): ClassDecorator" as Resolver
+  hide Resolver circle
+
+  class "function UseGuards(): ClassDecorator | MethodDecorator" as UseGuards
+  hide UseGuards circle
+
+  class "function UseInterceptors(): ClassDecorator | MethodDecorator" as UseInterceptors
+  hide UseInterceptors circle
+
+  class "function Query(): MethodDecorator" as Query
+  hide Query circle
+
+  class "function Mutation(): MethodDecorator" as Mutation
+  hide Mutation circle
+
+  class "function Args(): ParameterDecorator" as Args
+  hide Args circle
+
+  Resolver -[hidden]down-> UseGuards
+  UseGuards -[hidden]down-> UseInterceptors
+  UseInterceptors -[hidden]down-> Query
+  Query -[hidden]down-> Mutation
+  Mutation -[hidden]down-> Args
+}
+
+package security.auth {
+  enum Role {
+    ADMIN
+    MITARBEITER
+    ABTEILUNGSLEITER
+    KUNDE
+  }
+
+  class "const Roles = (...roles: Role[]) => SetMetadata()" as Roles
+  hide Roles circle
+
+  Roles ..> Role
+}
+
+package auto #DDDDDD {
+  package entity #FFFFFF {
+    class Auto <<entity>>
+  }
+
+  package service #FFFFFF {
+    class AutoService << control >>
+  }
+
+  class "type AutoDTO = Auto & { id?: string; version?: number; }" as AutoDTO
+  hide AutoDTO circle
+
+  AutoResolver o-down-> "1" AutoService : service
+  AutoResolver ..> Auto
+
+  AutoResolver .up.> Resolver
+  AutoResolver .up.> UseGuards
+  AutoResolver .up.> UseInterceptors
+  AutoResolver .up.> Query
+  AutoResolver .up.> Mutation
+  AutoResolver .up.> Args
+
+  AutoResolver .up.> Roles
+  AutoResolver .up.> Role
+
+  AutoResolver ..> AutoDTO
+
+  AutoResolver .up.> Promise
+
+  class AutoResolver << control >> << @Resolver() >> << @UseGuards() >> << @UseInterceptors() >> {
+    + @Query async findById(@Args() id: string): Promise<AutoDTO>
+    + @Query async find(@Args() modell: string |undefined): Promise<AutoDTO[]>
+    + @Mutation @Roles() async create(@Args() auto: Auto): Promise<string>
+    + @Mutation @Roles() async update(@Args() auto: AutoDTO): Promise<number>
+    + @Mutation @Roles() async delete(@Args() id: string): Promise<boolean>
+  }
+}
+
+hide empty members
+
+footer (c) Juergen Zimmermann
+
+@enduml

@@ -14,6 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-export * from './authentication';
-export * from './roles';
-export * from './service';
+export { JwtAuthGuard, JwtAuthGraphQlGuard, JwtStrategy } from './jwt';
+export type { RequestWithUser } from './jwt';
+export { LocalAuthGuard, LocalStrategy } from './local';
+export { ROLES_KEY, Roles, RolesGuard, RolesGraphQlGuard } from './roles';
+export {
+    AuthService,
+    NoTokenError,
+    Role,
+    UserInvalidError,
+    UserService,
+} from './service';
+export type { LoginResult, User } from './service';

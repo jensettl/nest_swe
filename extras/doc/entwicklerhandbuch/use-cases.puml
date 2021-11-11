@@ -19,16 +19,16 @@ actor Admin
 actor Kunde
 
 rectangle kunde {
-    Gast --> (Buch suchen)
-    Admin --> (Buch suchen)
-    Admin --> (Buch anlegen)
-    Admin --> (Buch ändern)
-    Admin --> (Buch löschen)
+    Gast --> (Auto suchen)
+    Admin --> (Auto suchen)
+    Admin --> (Auto anlegen)
+    Admin --> (Auto ändern)
+    Admin --> (Auto löschen)
     Admin --> (Datei hochladen)
     Admin --> (Datei herunterladen)
-    Kunde --> (Buch suchen)
-    Kunde --> (Buch anlegen)
-    Kunde --> (Buch ändern)
+    Kunde --> (Auto suchen)
+    Kunde --> (Auto anlegen)
+    Kunde --> (Auto ändern)
     Kunde --> (Datei herunterladen)
 }
 

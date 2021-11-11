@@ -45,10 +45,11 @@ import {
     UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
-import { JwtAuthGuard, LocalAuthGuard } from './authentication';
 import { Request, Response } from 'express';
 import { ResponseTimeInterceptor, getLogger } from '../../logger';
-import type { RequestWithUser } from './authentication/jwt-auth.guard';
+import { JwtAuthGuard } from './jwt';
+import { LocalAuthGuard } from './local';
+import type { RequestWithUser } from './jwt/jwt-auth.guard';
 import { paths } from '../../config';
 
 class Login {

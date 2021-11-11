@@ -55,7 +55,7 @@ export class UserService {
      *  mit dem angegebenen Benutzernamen gibt. Sonst `undefined`.
      */
     async findOne(username: string) {
-        return this.#users.find((u: User) => u.username === username);
+        return this.#users.find((user: User) => user.username === username);
     }
 
     /**

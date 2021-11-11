@@ -26,14 +26,19 @@ resources:
   - ../base
 
 configMapGenerator:
-  - name: buch-env
+  - name: auto-env
     behavior: merge
     literals:
       - NODE_ENV=development
+      - LOG_DIR=/var/log/node
       - LOG_LEVEL=debug
-      #- APOLLO="false"
+      - LOG_PRETTY="true"
+      #- APOLLO_DEBUG="false"
+      - DB_HOST=mongodb
       - DB_USER=admin
+      - DB_PASS=p
       - DB_POPULATE="true"
+      - DB_POPULATE_FILES="true"
       - DB_AUTO_INDEX="true"
       - K8S_TLS="false"
       - USER_PASSWORD_ENCODED=$2b$10$YTg4.iW.FPRqHExVLRf05Ob/z/BQqjUxJgncct2TgxGBjl4cCUNGS

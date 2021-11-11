@@ -20,7 +20,7 @@
  * @packageDocumentation
  */
 
-import type { Buch } from '../../buch/entity';
+import type { Auto } from '../../auto/entity';
 import { DbService } from '../../db/db.service';
 import { GridFSBucket } from 'mongodb';
 import type { GridFSBucketWriteStreamOptions } from 'mongodb';
@@ -31,7 +31,7 @@ import type { OnApplicationBootstrap } from '@nestjs/common';
 import { createReadStream } from 'fs';
 import { dbConfig } from '../db';
 import { getLogger } from '../../logger';
-import { modelName } from '../../buch/entity';
+import { modelName } from '../../auto/entity';
 import { testdaten } from './testdaten';
 import { testfiles } from './testfiles';
 /**
@@ -42,21 +42,21 @@ import { testfiles } from './testfiles';
 export class DbPopulateService implements OnApplicationBootstrap {
     readonly #dbService: DbService;
 
-    readonly #buchModel: Model<Buch>;
+    readonly #autoModel: Model<Auto>;
 
     readonly #logger = getLogger(DbPopulateService.name);
 
     readonly #testdaten = testdaten;
 
     /**
-     * Initialisierung durch DI mit `Model<Buch>` gemäß _Mongoose_.
+     * Initialisierung durch DI mit `Model<Auto>` gemäß _Mongoose_.
      */
     constructor(
         dbService: DbService,
-        @InjectModel(modelName) buchModel: Model<Buch>,
+        @InjectModel(modelName) autoModel: Model<Auto>,
     ) {
         this.#dbService = dbService;
-        this.#buchModel = buchModel;
+        this.#autoModel = autoModel;
     }
 
     /**
@@ -90,19 +90,19 @@ export class DbPopulateService implements OnApplicationBootstrap {
         }
 
         try {
-            await this.#buchModel.collection.drop();
+            await this.#autoModel.collection.drop();
         } catch {
             this.#logger.info('#populateTestdaten: Keine Collection vorhanden');
         }
 
-        const collection = await this.#buchModel.createCollection();
+        const collection = await this.#autoModel.createCollection();
         this.#logger.warn(
             '#populateTestdaten: Collection %s neu angelegt',
             collection.collectionName,
         );
 
         // https://mongoosejs.com/docs/api.html#model_Model.insertMany
-        const insertedDocs = await this.#buchModel.insertMany(this.#testdaten, {
+        const insertedDocs = await this.#autoModel.insertMany(this.#testdaten, {
             lean: true,
         });
         this.#logger.warn(

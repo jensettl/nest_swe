@@ -1,0 +1,13 @@
+{
+  "modell": "Geaendertrest",
+  "verbrauch": 5,
+  "typ": "FAMILIENKUTSCHE",
+  "marke": "AUDI",
+  "preis": 9999,
+  "rabatt": 0.99,
+  "lieferbar": true,
+  "datum": "2020-02-01",
+  "modellnr": "0-0070-9732-8",
+  "homepage": "https://test.rest",
+  "herstellorte": ["ESSLINGEN", "FRANKFURZ"]
+}

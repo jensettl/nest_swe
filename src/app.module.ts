@@ -17,7 +17,7 @@
 import type { MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { dbConfig, graphQlConfig } from './config';
 import { AuthModule } from './security/auth/auth.module';
-import { BuchModule } from './buch/buch.module';
+import { AutoModule } from './auto/auto.module';
 import { DbModule } from './db/db.module';
 import { DevModule } from './config/dev/dev.module';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -31,7 +31,7 @@ import { RequestLoggerMiddleware } from './logger';
 @Module({
     imports: [
         AuthModule,
-        BuchModule,
+        AutoModule,
         MongooseModule.forRoot(dbConfig.url),
         DbModule,
         DevModule,
