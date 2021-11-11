@@ -60,9 +60,9 @@ include::komponenten.puml[]
 bla bla
 
 .Controller für die REST-Schnittstelle
-[plantuml,BuchController,svg]
+[plantuml,AutoController,svg]
 ----
-include::BuchController.puml[]
+include::AutoController.puml[]
 ----
 
 === Die GraphQL-Schnittstelle
@@ -70,9 +70,9 @@ include::BuchController.puml[]
 bla bla
 
 .Resolver für die GraphQL-Schnittstelle
-[plantuml,BuchResolver,svg]
+[plantuml,AutoResolver,svg]
 ----
-include::BuchResolver.puml[]
+include::AutoResolver.puml[]
 ----
 
 === Der Anwendungskern
@@ -80,9 +80,9 @@ include::BuchResolver.puml[]
 bla bla
 
 .Anwendungskern
-[plantuml,BuchService,svg]
+[plantuml,AutoService,svg]
 ----
-include::BuchService.puml[]
+include::AutoService.puml[]
 ----
 
 === Klasse für Entities und MongoDB-Dokumente
@@ -90,9 +90,9 @@ include::BuchService.puml[]
 bla bla
 
 .Entity und Document
-[plantuml,Buch,svg]
+[plantuml,Auto,svg]
 ----
-include::Buch.puml[]
+include::Auto.puml[]
 ----
 
 == Programmierrichtlinien für TypeScript und JavaScript
